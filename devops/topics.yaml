@@ -1,0 +1,49 @@
+apiVersion: platform.confluent.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: customers.events
+  namespace: confluent
+spec:
+  replicas: 1
+  partitionCount: 10
+  configs:
+    cleanup.policy: "delete"
+
+---
+
+apiVersion: platform.confluent.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: products.events
+  namespace: confluent
+spec:
+  replicas: 1
+  partitionCount: 10
+  configs:
+    cleanup.policy: "delete"
+
+---
+
+apiVersion: platform.confluent.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: transactions.events
+  namespace: confluent
+spec:
+  replicas: 1
+  partitionCount: 10
+  configs:
+    cleanup.policy: "delete"
+
+---
+
+apiVersion: platform.confluent.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: shipments.events
+  namespace: confluent
+spec:
+  replicas: 1
+  partitionCount: 10
+  configs:
+    cleanup.policy: "delete"

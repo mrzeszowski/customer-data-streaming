@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-source
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-source
+  template:
+    metadata:
+      labels:
+        app: customer-source
+    spec:
+      containers:
+        - name: customer-source
+          image: customer-data-streaming-source:3.2.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production" # Optional, set if needed
+            - name: Logging__LogLevel__Microsoft.EntityFrameworkCore
+              value: Warning
+            - name: Logging__LogLevel__Default
+              value: Warning
+            - name: ConnectionStrings__Customers
+              value: "User ID=postgres;Password=postgres;Host=postgres.default.svc.cluster.local;Port=5432;Database=customers_db"
+            - name: ConnectionStrings__Products
+              value: "User ID=postgres;Password=postgres;Host=postgres.default.svc.cluster.local;Port=5432;Database=products_db"
+            - name: ConnectionStrings__Transactions
+              value: "User ID=postgres;Password=postgres;Host=postgres.default.svc.cluster.local;Port=5432;Database=transactions_db"
+            - name: ConnectionStrings__Shipments
+              value: "User ID=postgres;Password=postgres;Host=postgres.default.svc.cluster.local;Port=5432;Database=shipments_db"
+            - name: CustomerSource__ServiceDelay
+              value: "10"
+            - name: CustomerSource__CreateCount
+              value: "3"
+            - name: CustomerSource__UpdateCount
+              value: "3"
+            - name: ProductSource__ServiceDelay
+              value: "60"
+            - name: TransactionSource__ServiceDelay
+              value: "5"
+            - name: TransactionSource__CreateCount
+              value: "20"
+            - name: TransactionSource__PayCount
+              value: "20"
+            - name: ShipmentSource__ServiceDelay
+              value: "1"
+            - name: ShipmentSource__ProcessCount
+              value: "10"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-source
+spec:
+  selector:
+    app: customer-source
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer

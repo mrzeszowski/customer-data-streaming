@@ -1,0 +1,35 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: shipment-events
+  namespace: flink
+spec:
+  image: shipment-events:2.1.0
+  flinkVersion: v1_19
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "2"
+  serviceAccount: flink
+  podTemplate:
+    spec:
+      containers:
+        # Do not change the main container name
+        - name: flink-main-container
+          env:
+              - name: POSTGRES_HOST
+                value: "postgres.default.svc.cluster.local"
+              - name: KAFKA_HOST
+                value: "kafka.confluent.svc.cluster.local:9092"
+              - name: PARALLELISM
+                value: "2"
+  jobManager:
+    resource:
+      memory: "2048m"
+      cpu: 0.5
+  taskManager:
+    resource:
+      memory: "2048m"
+      cpu: 0.5
+  job:
+    jarURI: /opt/flink/usrlib/shipments.jar
+    parallelism: 2
+    upgradeMode: stateless

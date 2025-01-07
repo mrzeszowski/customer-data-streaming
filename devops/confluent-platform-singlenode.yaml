@@ -471,6 +471,9 @@ spec:
           - name: redis-kafka-connect
             owner: redis
             version: latest
+          - name: kafka-connect-bigquery
+            owner: wepay
+            version: latest
 ---
 apiVersion: platform.confluent.io/v1beta1
 kind: KsqlDB

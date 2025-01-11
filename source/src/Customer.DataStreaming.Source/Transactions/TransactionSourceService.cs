@@ -49,7 +49,7 @@ public class TransactionSourceService(IServiceProvider serviceProvider,
         if (customer is null)
             return;
 
-        var unlucky = new Random().Next(1, 50) == 7;
+        var unlucky = new Random().Next(1, 100) == 7;
         
         var products = Products.ProductCatalog.Products.OrderBy(x => Guid.NewGuid())
             .Take(unlucky ? new Random().Next(10, 15) : new Random().Next(1, 3))

@@ -23,12 +23,12 @@ spec:
                 value: "2"
   jobManager:
     resource:
-      memory: "2048m"
-      cpu: 0.5
+      memory: "1024m"
+      cpu: 0.25
   taskManager:
     resource:
-      memory: "2048m"
-      cpu: 0.5
+      memory: "1024m"
+      cpu: 0.25
   job:
     jarURI: /opt/flink/usrlib/shipments.jar
     parallelism: 2

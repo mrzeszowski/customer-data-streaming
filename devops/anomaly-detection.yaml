@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anomaly-detection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anomaly-detection
+  template:
+    metadata:
+      labels:
+        app: anomaly-detection
+    spec:
+      containers:
+        - name: anomaly-detection 
+          image: anomaly-detection:1.4.0
+          ports:
+            - containerPort: 8090
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          env:
+            - name: KAFKA
+              value: "kafka.confluent.svc.cluster.local:9092"
+            - name: CONSUMER_GROUP_ID
+              value: anomaly-detection.consumer.v1.4.0

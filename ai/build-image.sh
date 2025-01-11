@@ -1,2 +1,2 @@
 eval $(minikube -p customer-data-streaming docker-env) &&   
-docker build . -t customer-data-streaming-source:3.3.0
+docker build . -t anomaly-detection:1.4.0

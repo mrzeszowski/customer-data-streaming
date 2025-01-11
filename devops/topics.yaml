@@ -47,3 +47,16 @@ spec:
   partitionCount: 10
   configs:
     cleanup.policy: "delete"
+
+---
+
+apiVersion: platform.confluent.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: anomalies.events
+  namespace: confluent
+spec:
+  replicas: 1
+  partitionCount: 10
+  configs:
+    cleanup.policy: "delete"

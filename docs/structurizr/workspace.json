@@ -1,0 +1,250 @@
+{
+  "configuration" : { },
+  "description" : "Description",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2025-01-21T06:24:52Z",
+  "model" : {
+    "people" : [ {
+      "description" : "An actor interacting with the system",
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Customer",
+      "properties" : {
+        "structurizr.dsl.identifier" : "customer"
+      },
+      "relationships" : [ {
+        "description" : "Uses",
+        "destinationId" : "2",
+        "id" : "9",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Uses",
+        "destinationId" : "4",
+        "id" : "10",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Uses",
+        "destinationId" : "5",
+        "id" : "11",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Handles customer data",
+      "documentation" : { },
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Customers Service",
+      "properties" : {
+        "structurizr.dsl.identifier" : "customersservice"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Manages product information",
+      "documentation" : { },
+      "id" : "3",
+      "location" : "Unspecified",
+      "name" : "Products Service",
+      "properties" : {
+        "structurizr.dsl.identifier" : "productsservice"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Processes transaction data",
+      "documentation" : { },
+      "id" : "4",
+      "location" : "Unspecified",
+      "name" : "Transactions Service",
+      "properties" : {
+        "structurizr.dsl.identifier" : "transactionsservice"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Manages shipment stages and details",
+      "documentation" : { },
+      "id" : "5",
+      "location" : "Unspecified",
+      "name" : "Shipments Service",
+      "properties" : {
+        "structurizr.dsl.identifier" : "shipmentsservice"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Stream data real-time using CDC and Jobs",
+      "documentation" : { },
+      "id" : "6",
+      "location" : "Unspecified",
+      "name" : "Apache Flink",
+      "properties" : {
+        "structurizr.dsl.identifier" : "flink"
+      },
+      "relationships" : [ {
+        "description" : "Listen using CDC",
+        "destinationId" : "2",
+        "id" : "12",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Listen using CDC",
+        "destinationId" : "3",
+        "id" : "13",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Listen using CDC",
+        "destinationId" : "4",
+        "id" : "14",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Listen using CDC",
+        "destinationId" : "5",
+        "id" : "15",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Pushes processed data",
+        "destinationId" : "7",
+        "id" : "16",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Message broker for event streaming",
+      "documentation" : { },
+      "id" : "7",
+      "location" : "Unspecified",
+      "name" : "Apache Kafka",
+      "properties" : {
+        "structurizr.dsl.identifier" : "kafka"
+      },
+      "relationships" : [ {
+        "description" : "Consumes Transactions data for anomaly detection",
+        "destinationId" : "8",
+        "id" : "17",
+        "sourceId" : "7",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Consumes data from Kafka, executes online training, detects anomalies, and pushes them back to Kafka",
+      "documentation" : { },
+      "id" : "8",
+      "location" : "Unspecified",
+      "name" : "Anomaly Detection AI",
+      "properties" : {
+        "structurizr.dsl.identifier" : "anomalydetection"
+      },
+      "relationships" : [ {
+        "description" : "Pushes detected anomalies",
+        "destinationId" : "7",
+        "id" : "18",
+        "sourceId" : "8",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Name",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKICAgIG1vZGVsIHsKICAgICAgICBjdXN0b21lciA9IHBlcnNvbiAiQ3VzdG9tZXIiICJBbiBhY3RvciBpbnRlcmFjdGluZyB3aXRoIHRoZSBzeXN0ZW0iCgogICAgICAgIGN1c3RvbWVyc1NlcnZpY2UgPSBzb2Z0d2FyZVN5c3RlbSAiQ3VzdG9tZXJzIFNlcnZpY2UiICJIYW5kbGVzIGN1c3RvbWVyIGRhdGEiCiAgICAgICAgcHJvZHVjdHNTZXJ2aWNlID0gc29mdHdhcmVTeXN0ZW0gIlByb2R1Y3RzIFNlcnZpY2UiICJNYW5hZ2VzIHByb2R1Y3QgaW5mb3JtYXRpb24iCiAgICAgICAgdHJhbnNhY3Rpb25zU2VydmljZSA9IHNvZnR3YXJlU3lzdGVtICJUcmFuc2FjdGlvbnMgU2VydmljZSIgIlByb2Nlc3NlcyB0cmFuc2FjdGlvbiBkYXRhIgogICAgICAgIHNoaXBtZW50c1NlcnZpY2UgPSBzb2Z0d2FyZVN5c3RlbSAiU2hpcG1lbnRzIFNlcnZpY2UiICJNYW5hZ2VzIHNoaXBtZW50IHN0YWdlcyBhbmQgZGV0YWlscyIKCiAgICAgICAgZmxpbmsgPSBzb2Z0d2FyZVN5c3RlbSAiQXBhY2hlIEZsaW5rIiAiU3RyZWFtIGRhdGEgcmVhbC10aW1lIHVzaW5nIENEQyBhbmQgSm9icyIKICAgICAgICBrYWZrYSA9IHNvZnR3YXJlU3lzdGVtICJBcGFjaGUgS2Fma2EiICJNZXNzYWdlIGJyb2tlciBmb3IgZXZlbnQgc3RyZWFtaW5nIgogICAgICAgIGFub21hbHlEZXRlY3Rpb24gPSBzb2Z0d2FyZVN5c3RlbSAiQW5vbWFseSBEZXRlY3Rpb24gQUkiICJDb25zdW1lcyBkYXRhIGZyb20gS2Fma2EsIGV4ZWN1dGVzIG9ubGluZSB0cmFpbmluZywgZGV0ZWN0cyBhbm9tYWxpZXMsIGFuZCBwdXNoZXMgdGhlbSBiYWNrIHRvIEthZmthIgoKICAgICAgICBjdXN0b21lciAtPiBjdXN0b21lcnNTZXJ2aWNlICJVc2VzIgogICAgICAgIGN1c3RvbWVyIC0+IHRyYW5zYWN0aW9uc1NlcnZpY2UgIlVzZXMiCiAgICAgICAgY3VzdG9tZXIgLT4gc2hpcG1lbnRzU2VydmljZSAiVXNlcyIKCiAgICAgICAgZmxpbmsgLT4gY3VzdG9tZXJzU2VydmljZSAiTGlzdGVuIHVzaW5nIENEQyIKICAgICAgICBmbGluayAtPiBwcm9kdWN0c1NlcnZpY2UgIkxpc3RlbiB1c2luZyBDREMiCiAgICAgICAgZmxpbmsgLT4gdHJhbnNhY3Rpb25zU2VydmljZSAiTGlzdGVuIHVzaW5nIENEQyIKICAgICAgICBmbGluayAtPiBzaGlwbWVudHNTZXJ2aWNlICJMaXN0ZW4gdXNpbmcgQ0RDIgoKICAgICAgICBmbGluayAtPiBrYWZrYSAiUHVzaGVzIHByb2Nlc3NlZCBkYXRhIgogICAgICAgIGthZmthIC0+IGFub21hbHlEZXRlY3Rpb24gIkNvbnN1bWVzIFRyYW5zYWN0aW9ucyBkYXRhIGZvciBhbm9tYWx5IGRldGVjdGlvbiIKICAgICAgICBhbm9tYWx5RGV0ZWN0aW9uIC0+IGthZmthICJQdXNoZXMgZGV0ZWN0ZWQgYW5vbWFsaWVzIgogICAgfQoKICAgICFzY3JpcHQgZ3Jvb3Z5IHsKICAgICAgICAvL3dvcmtzcGFjZS52aWV3cy5jcmVhdGVEZWZhdWx0Vmlld3MoKQogICAgICAgIHdvcmtzcGFjZS52aWV3cy52aWV3cy5lYWNoIHsgaXQuZGlzYWJsZUF1dG9tYXRpY0xheW91dCgpIH0KICAgIH0KCiAgICB2aWV3cyB7CiAgICAgICAgc3lzdGVtTGFuZHNjYXBlIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgICMgYXV0b2xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgdGhlbWVzIGRlZmF1bHQgaHR0cHM6Ly9zdGF0aWMuc3RydWN0dXJpenIuY29tL3RoZW1lcy9taWNyb3NvZnQtYXp1cmUtMjAyMS4wMS4yNi90aGVtZS5qc29uIGh0dHBzOi8vc3RydWN0dXJpenIuY29tL3NoYXJlLzM2MTQxL3RoZW1lIGh0dHBzOi8vc3RhdGljLnN0cnVjdHVyaXpyLmNvbS90aGVtZXMvYW1hem9uLXdlYi1zZXJ2aWNlcy0yMDIyLjA0LjMwL3RoZW1lLmpzb24gaHR0cHM6Ly9zdGF0aWMuc3RydWN0dXJpenIuY29tL3RoZW1lcy9nb29nbGUtY2xvdWQtcGxhdGZvcm0tdjEuNS90aGVtZS5qc29uCiAgICB9Cn0="
+  },
+  "views" : {
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "SystemLandscape-001",
+      "styles" : { },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json", "https://static.structurizr.com/themes/microsoft-azure-2021.01.26/theme.json", "https://structurizr.com/share/36141/theme", "https://static.structurizr.com/themes/amazon-web-services-2022.04.30/theme.json", "https://static.structurizr.com/themes/google-cloud-platform-v1.5/theme.json" ]
+    },
+    "systemLandscapeViews" : [ {
+      "dimensions" : {
+        "height" : 2200,
+        "width" : 3800
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 200,
+        "y" : 1115
+      }, {
+        "id" : "2",
+        "x" : 900,
+        "y" : 165
+      }, {
+        "id" : "3",
+        "x" : 900,
+        "y" : 665
+      }, {
+        "id" : "4",
+        "x" : 900,
+        "y" : 1165
+      }, {
+        "id" : "5",
+        "x" : 900,
+        "y" : 1665
+      }, {
+        "id" : "6",
+        "x" : 1650,
+        "y" : 1215
+      }, {
+        "id" : "7",
+        "x" : 2400,
+        "y" : 1215
+      }, {
+        "id" : "8",
+        "x" : 3150,
+        "y" : 1215
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "generatedKey" : true,
+      "key" : "SystemLandscape-001",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "10"
+      }, {
+        "id" : "11",
+        "vertices" : [ {
+          "x" : 405,
+          "y" : 1815
+        } ]
+      }, {
+        "id" : "12",
+        "vertices" : [ {
+          "x" : 1875,
+          "y" : 315
+        } ]
+      }, {
+        "id" : "13"
+      }, {
+        "id" : "14"
+      }, {
+        "id" : "15"
+      }, {
+        "id" : "16"
+      }, {
+        "id" : "17"
+      }, {
+        "id" : "18",
+        "vertices" : [ {
+          "x" : 3370,
+          "y" : 1085
+        }, {
+          "x" : 2620,
+          "y" : 1080
+        } ]
+      }, {
+        "id" : "9",
+        "vertices" : [ {
+          "x" : 390,
+          "y" : 320
+        } ]
+      } ]
+    } ]
+  }
+}
